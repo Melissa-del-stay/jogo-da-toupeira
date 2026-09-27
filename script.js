@@ -1,12 +1,14 @@
 const buracos = document.querySelectorAll(".buraco");
 const botaoComecar = document.getElementById("botaoComecar");
 const pontosElemento = document.getElementById("pontos");
+const recordeElemento = document.getElementById("recorde");
 const tempoElemento = document.getElementById("tempo");
 const vidasElemento = document.getElementById("vidas");
 const mensagem = document.getElementById("mensagem");
 
 let pontos = 0;
-let tempo = 30;
+let recorde = 0;
+let tempo = 90;
 let vidas = 3;
 let jogoAtivo = false;
 
@@ -46,7 +48,7 @@ function mostrarToupeira() {
 
 function iniciarJogo() {
     pontos = 0;
-    tempo = 30;
+    tempo = 90;
     vidas = 3;
     jogoAtivo = true;
 
@@ -84,6 +86,12 @@ function finalizarJogo() {
         buraco.innerHTML = "";
     });
 
+    // Verifica se a pontuação atual é maior que o recorde
+    if (pontos > recorde) {
+        recorde = pontos;
+        recordeElemento.textContent = recorde;
+    }
+
     mensagem.textContent = "Fim de jogo! Pontuação: " + pontos;
 }
 
@@ -94,12 +102,11 @@ botaoComecar.addEventListener("click", iniciarJogo);
 buracos.forEach((buraco) => {
     buraco.addEventListener("click", function () {
 
-        // Só funciona enquanto o jogo estiver acontecendo
         if (!jogoAtivo) {
             return;
         }
 
-        // Se o buraco NÃO tiver uma toupeira, perde uma vida
+        // Se o buraco não tiver uma toupeira, perde uma vida
         if (!buraco.querySelector(".toupeira")) {
 
             vidas--;
