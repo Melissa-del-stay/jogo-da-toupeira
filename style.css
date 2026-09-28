@@ -9,6 +9,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
     background-image: url("./grama.jpg");
     background-size: cover;
     background-position: center;
@@ -20,7 +21,6 @@ body {
 .container {
     width: 550px;
     max-width: 92%;
-
     text-align: center;
 
     background: #fffdf5;
@@ -45,6 +45,7 @@ h1 {
 
 .informacoes {
     display: flex;
+
     justify-content: space-around;
     align-items: center;
 
@@ -143,7 +144,6 @@ button:active {
 
 .toupeira {
     width: 70px;
-
     height: 70px;
 
     background: #986044;
@@ -153,7 +153,6 @@ button:active {
     position: absolute;
 
     left: 50%;
-
     top: 50%;
 
     transform: translate(-50%, -50%);
@@ -161,28 +160,53 @@ button:active {
     display: flex;
 
     justify-content: center;
-
     align-items: center;
 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
 }
 
 .toupeira::before {
-    content: "🐹";
+    content: "";
 
-    font-size: 50px;
+    display: block;
+
+    width: 250px;
+    height: 250px;
+
+    background-image: url("./coelho.png");
+
+    background-size: contain;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+}
+
+/* Imagem que aparece quando o coelho é acertado */
+.toupeira.acertado::before {
+    background-image: url("./coelho-acertado.png");
 }
 
 #mensagem {
-    font-size: 18px;
-
+    font-size: 20px;
     font-weight: bold;
 
-    color: #abee97;
+    color: #3d6b2f;
+
+    background: #edf7e8;
+
+    padding: 12px 18px;
+
+    border-radius: 15px;
+
+    border: 2px solid #8bcf62;
 
     min-height: 25px;
 
+    margin-top: 18px;
     margin-bottom: 0;
+
+    line-height: 1.5;
 }
 
 @media (max-width: 500px) {
@@ -204,11 +228,12 @@ button:active {
     }
 
     .toupeira {
-        width: 60px;
-        height: 60px;
+        width: 250px;
+        height: 250px;
     }
 
     .toupeira::before {
-        font-size: 42px;
+        width: 60px;
+        height: 60px;
     }
 }
