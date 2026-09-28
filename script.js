@@ -7,13 +7,19 @@ const vidasElemento = document.getElementById("vidas");
 const mensagem = document.getElementById("mensagem");
 
 let pontos = 0;
-let recorde = 0;
+
+// Carrega o recorde salvo no navegador
+let recorde = Number(localStorage.getItem("recordeCoelho")) || 0;
+
 let tempo = 90;
 let vidas = 3;
 let jogoAtivo = false;
 
 let intervaloToupeira;
 let intervaloTempo;
+
+// Mostra o recorde salvo quando a página abre
+recordeElemento.textContent = recorde;
 
 function atualizarVidas() {
     vidasElemento.textContent = "❤️".repeat(vidas);
@@ -119,17 +125,31 @@ function finalizarJogo() {
     // Verifica se fez novo recorde
     let novoRecorde = false;
 
+    if (pontos > recorde) {
+
+        recorde = pontos;
+
+        // Salva o novo recorde no navegador
+        localStorage.setItem("recordeCoelho", recorde);
+
+        // Atualiza o recorde na tela
+        recordeElemento.textContent = recorde;
+
+        novoRecorde = true;
+    }
+
     if (novoRecorde) {
 
-    mensagem.innerHTML =
-        "🎉 <strong>Fim de jogo!</strong><br>" +
-        "🏆 Novo recorde!<br>" +
-        "⭐ Pontuação: " + pontos;
+        mensagem.innerHTML =
+            "🎉 <strong>Fim de jogo!</strong><br>" +
+            "🏆 Novo recorde!<br>" +
+            "⭐ Pontuação: " + pontos;
 
     } else {
 
-        mensagem.textContent =
-            "🎮 Fim de jogo! Pontuação: " + pontos;
+        mensagem.innerHTML =
+            "🎮 <strong>Fim de jogo!</strong><br>" +
+            "⭐ Pontuação: " + pontos;
     }
 }
 
